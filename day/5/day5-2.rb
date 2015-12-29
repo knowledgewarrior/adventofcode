@@ -1,28 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-require 'active_support/all'
-
 #adventofcode.com/day/5
 
 # --- Day 5: Doesn't He Have Intern-Elves For This? ---
-
-# Santa needs help figuring out which strings in his text file are naughty or nice.
-
-# A nice string is one with all of the following properties:
-# It contains at least three vowels (aeiou only), like aei, xazegov, or aeiouaeiouaeiou.
-# It contains at least one letter that appears twice in a row, like xx, abcdde (dd), or aabbccdd (aa, bb, cc, or dd).
-# It does not contain the strings ab, cd, pq, or xy, even if they are part of one of the other requirements.
-
-# For example:
-# ugknbfddgicrmopn is nice because it has at least three vowels (u...i...o...), a double letter (...dd...), and none of the disallowed substrings.
-# aaa is nice because it has at least three vowels and a double letter, even though the letters used by different rules overlap.
-# jchzalrnumimnmhp is naughty because it has no double letter.
-# haegwjzuvuyypxyu is naughty because it contains the string xy.
-# dvszwmarrgswjxmb is naughty because it contains only one vowel.
-
-# How many strings are nice?
-
 # --- Part Two ---
 
 # Realizing the error of his ways, Santa has switched to a better model of determining whether a string is naughty or nice. None of the old rules apply, as they are all clearly ridiculous.
@@ -40,39 +20,27 @@ require 'active_support/all'
 # How many strings are nice under these new rules?
 
 
-#part 1
+# part 2
 linecount = 0
-File.foreach("inputest.txt") do |line|
 
-# 	# if line.scan(/[aeiou]/).count >= 3
-#  #  	puts line
-# 	# end
-# 	# if line.scan(/(\w)\1+/).count >=1
-# 	# 	puts line
-# 	# end
-# 	if line.exclude?("ab") && line.exclude?("cd") && line.exclude?("pq") && line.exclude?("xy")
-#    puts line
-#    linecount +=1
-# 	end
+File.foreach("input.txt") do |line|
+	# 1st requirement:
+	# if (line.scan(/(?=(.{2}).*\1)/).count >=1)
+	# 	puts line
+	# 	linecount +=1
+	# end
 
-	if (line.scan(/[aeiou]/).count >= 3) && (line.scan(/(\w)\1+/).count >=1) && (line.exclude?("ab") && line.exclude?("cd") && line.exclude?("pq") && line.exclude?("xy"))
-  	linecount +=1
-  	#puts line
-  end
+	#2nd requirement
+	# if (line.scan(/((.)(.)\2{1,})/).map(&:first).count >= 1)
+	# 	puts line
+	# 	linecount +=1
+	# end
+
+	if (line.scan(/(?=(.{2}).*\1)/).count >=1) && (line.scan(/((.)(.)\2{1,})/).map(&:first).count >= 1)
+		puts line
+		linecount +=1
+	end
+
 end
 
 puts linecount
-
-
-# part 2
-
-
-
-
-
-
-
-
-
-
-
