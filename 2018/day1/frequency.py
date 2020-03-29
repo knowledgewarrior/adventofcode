@@ -32,7 +32,7 @@ def main():
   with open(filepath) as f_in:
     for num in nonblank_lines(f_in):
       frequency += float(num)
-      print frequency
+      print (frequency)
 
 def nonblank_lines(f):
     for l in f:
