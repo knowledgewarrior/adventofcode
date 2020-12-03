@@ -23,8 +23,6 @@ import os
 
 def main():
 
-  results = []
-
   with open('input.txt') as my_file:
     num_list = my_file.readlines()
     for item in nonblank_lines(num_list):
