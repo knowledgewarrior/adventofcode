@@ -19,3 +19,35 @@ In the above example, 2 passwords are valid. The middle password, cdefg, is not;
 
 How many passwords are valid according to their policies?
 """
+
+import sys
+import os
+
+def main():
+
+  validpwdcount = 0
+
+  with open('input.txt') as my_file:
+    password_list = my_file.readlines()
+    for item in nonblank_lines(password_list):
+        pwstrength = item.split(" ")[0]
+        pwletter = item.split(" ")[1]
+        pwletter = pwletter.replace(":", "")
+        pwrd = item.split(" ")[2]
+        passwdmin = int(pwstrength.split("-")[0])
+        passwdmax = int(pwstrength.split("-")[1])
+        lettercount = int(pwrd.count(pwletter))
+        print(pwletter + " : " + str(lettercount))
+        if (lettercount >= passwdmin) and (lettercount <= passwdmax):
+            validpwdcount +=1
+        print(str(validpwdcount))
+
+
+def nonblank_lines(f):
+    for l in f:
+        line = l.rstrip()
+        if line:
+            yield line
+
+if __name__ == '__main__':
+   main()
